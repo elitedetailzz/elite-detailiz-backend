@@ -8,49 +8,56 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-/* ========================
-   MIDDLEWARE
-======================== */
+/* =======================
+   Middleware
+======================= */
+
 app.use(express.json());
 
 app.use(
   cors({
-    origin: "*", // ✅ TEMPORARILY allow all (fixes GitHub Pages)
-    methods: ["GET", "POST", "OPTIONS"],
+    origin: [
+      "http://localhost:5500",
+      "http://127.0.0.1:5500",
+      "https://elitedetailzz.github.io"
+    ],
+    methods: ["POST", "GET"],
     allowedHeaders: ["Content-Type"]
   })
 );
 
-// ✅ REQUIRED for preflight
-app.options("*", cors());
-
-/* ========================
-   HEALTH CHECK
-======================== */
-app.get("/health", (req, res) => {
-  res.status(200).send("OK");
+/* =======================
+   Health Check
+======================= */
+app.get("/", (req, res) => {
+  res.send("Elite Detailz backend is running 🚗✨");
 });
 
-/* ========================
-   EMAIL TRANSPORTER
-======================== */
+/* =======================
+   Email Transport
+======================= */
 const transporter = nodemailer.createTransport({
-  host: process.env.EMAIL_HOST,
-  port: process.env.EMAIL_PORT,
-  secure: false,
+  service: "gmail",
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS
   }
 });
 
-/* ========================
-   SEND QUOTE
-======================== */
+/* Verify email connection on startup */
+transporter.verify((err, success) => {
+  if (err) {
+    console.error("❌ Email transporter error:", err);
+  } else {
+    console.log("✅ Email transporter ready");
+  }
+});
+
+/* =======================
+   Send Quote Route
+======================= */
 app.post("/send-quote", async (req, res) => {
   try {
-    console.log("Quote received:", req.body);
-
     const {
       name,
       email,
@@ -61,32 +68,43 @@ app.post("/send-quote", async (req, res) => {
       vehicleDetails
     } = req.body;
 
-    await transporter.sendMail({
+    console.log("📩 Quote received:", req.body);
+
+    const mailOptions = {
       from: `"Elite Detailz" <${process.env.EMAIL_USER}>`,
-      to: process.env.RECEIVER_EMAIL,
+      to: process.env.EMAIL_USER,
+      replyTo: email,
       subject: "🚗 New Quote Request",
       html: `
         <h2>New Quote Request</h2>
-        <p><b>Name:</b> ${name}</p>
-        <p><b>Email:</b> ${email}</p>
-        <p><b>Phone:</b> ${phone}</p>
-        <p><b>Service:</b> ${service}</p>
-        <p><b>Date:</b> ${date}</p>
-        <p><b>Time:</b> ${time}</p>
-        <p><b>Vehicle:</b> ${vehicleDetails}</p>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Phone:</strong> ${phone}</p>
+        <p><strong>Service:</strong> ${service}</p>
+        <p><strong>Date:</strong> ${date}</p>
+        <p><strong>Time:</strong> ${time}</p>
+        <p><strong>Vehicle Details:</strong><br>${vehicleDetails}</p>
       `
-    });
+    };
+
+    await transporter.sendMail(mailOptions);
+
+    console.log("✅ Email sent successfully");
 
     res.status(200).json({ success: true });
-  } catch (err) {
-    console.error("Send error:", err);
-    res.status(500).json({ success: false });
+  } catch (error) {
+    console.error("❌ Email send failed:", error);
+
+    res.status(500).json({
+      success: false,
+      error: "Email failed to send"
+    });
   }
 });
 
-/* ========================
-   START SERVER
-======================== */
+/* =======================
+   Start Server
+======================= */
 app.listen(PORT, () => {
-  console.log(`✅ Backend running on port ${PORT}`);
+  console.log(`🚀 Backend running on port ${PORT}`);
 });
