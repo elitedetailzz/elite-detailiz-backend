@@ -1,9 +1,8 @@
 import express from "express"; 
 import cors from "cors";
 import dotenv from "dotenv";
-import { Resend } from "resend";
 import multer from "multer";
-import fs from "fs";
+import { Resend } from "resend";
 
 dotenv.config();
 
@@ -17,11 +16,8 @@ app.use(cors({
   allowedHeaders: ["Content-Type"]
 }));
 
-// Keep JSON for normal requests
-app.use(express.json());
-
 // Multer setup for file uploads
-const upload = multer({ dest: "uploads/" }); // temporary storage for uploaded images
+const upload = multer({ storage: multer.memoryStorage() });
 
 // Resend setup
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -31,24 +27,22 @@ app.get("/", (req, res) => {
   res.send("✅ Elite Detailz backend is running");
 });
 
-// Quote endpoint with file upload
-app.post("/send-quote", upload.single("vehicleImage"), async (req, res) => {
+// Quote endpoint
+app.post("/send-quote", upload.array("vehiclePhotos"), async (req, res) => {
   try {
     const { name, email, phone, service, date, time } = req.body;
-    const vehicleImage = req.file;
+    const files = req.files; // Uploaded images
 
     // Basic validation
     if (!name || !email || !phone || !service) {
       return res.status(400).json({ error: "Missing required fields" });
     }
 
-    // Optional: Convert image to Base64 to embed in email
-    let vehicleImageHTML = "No image uploaded";
-    if (vehicleImage) {
-      const imageBase64 = Buffer.from(fs.readFileSync(vehicleImage.path)).toString("base64");
-      vehicleImageHTML = `<p><strong>Vehicle Image:</strong></p>
-      <img src="data:${vehicleImage.mimetype};base64,${imageBase64}" width="300">`;
-    }
+    // Convert uploaded files to Resend attachments
+    const attachments = files?.map(file => ({
+      filename: file.originalname,
+      content: file.buffer
+    }));
 
     // Send email via Resend
     await resend.emails.send({
@@ -63,15 +57,12 @@ app.post("/send-quote", upload.single("vehicleImage"), async (req, res) => {
         <p><strong>Service:</strong> ${service}</p>
         <p><strong>Date:</strong> ${date || "N/A"}</p>
         <p><strong>Time:</strong> ${time || "N/A"}</p>
-        ${vehicleImageHTML}
-      `
+        <p><strong>Vehicle Photos:</strong> See attachments</p>
+      `,
+      attachments
     });
 
     res.status(200).json({ success: true });
-
-    // Optional: remove the uploaded file after sending email
-    if (vehicleImage) fs.unlinkSync(vehicleImage.path);
-
   } catch (error) {
     console.error("❌ Email error:", error);
     res.status(500).json({ error: "Failed to send quote" });
