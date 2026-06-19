@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+  <title>Elite Detailz</title>
+
+<link rel="icon" href="images/clean-logo.png">
+
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "x7xsqb8ue6");
+</script>
+
+<style>
+
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  scroll-behavior: smooth;
+}
+
+body { overflow-x: hidden; }
+
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* ===== HEADER ===== */
+.top-header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 70px;
+  background: #000;
+  display: flex;
+  align-items: center;
+  padding: 0 40px;
+  z-index: 1000;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  flex: 1;
+}
+
+.header-left img { width: 48px; }
+
+.nav {
+  display: flex;
+  gap: 30px;
+}
+
+.nav a {
+  color: #fff;
+  font-size: 0.8rem;
+  text-decoration: none;
+  letter-spacing: 1.2px;
+}
+
+.nav a:hover { color: #60a5fa; }
+
+.quote-btn {
+  background: linear-gradient(135deg, #7c3aed, #60a5fa);
+  color: #fff;
+  padding: 8px 18px;
+  border-radius: 50px;
+  text-decoration: none;
+  position: relative;
+  isolation: isolate;
+}
+
+.quote-btn::before {
+  content: "";
+  position: absolute;
+  inset: -5px;
+  border-radius: 50px;
+  background: linear-gradient(135deg, #7c3aed, #60a5fa);
+  filter: blur(18px);
+  opacity: 0.75;
+  z-index: -1;
+}
+
+.quote-btn:hover::before { opacity: 1; }
+
+/* ===== HERO ===== */
+.hero {
+  height: 100vh;
+  padding-top: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(180deg, #7c3aed, #60a5fa);
+  position: relative;
+  overflow: hidden;
+}
+
+.logo-container { text-align: center; z-index: 2; }
+
+.diamond-logo { width: 320px; }
+
+.logo-text {
+  margin-top: 15px;
+  font-size: 2.4rem;
+  font-weight: 900;
+  background: linear-gradient(180deg, #000, #7c3aed);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ===== DIAMOND RAIN ===== */
+.rain {
+  position: absolute;
+  top: -60px;
+  width: 30px;
+  animation: fall 6s linear forwards;
+  pointer-events: none;
+}
+
+@keyframes fall {
+  from { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+  to { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+}
+
+/* ===== ABOUT ===== */
+.about {
+  padding: 120px 0;
+  background: #fff;
+}
+
+.about-title h2 {
+  text-align: center;
+  font-size: 2.6rem;
+  margin-bottom: 80px;
+}
+
+.about-content {
+  max-width: 1400px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+}
+
+.about-divider { background: #e5e7eb; }
+
+.review-fade {
+  width: 320px;
+  height: 430px;
+  margin: auto;
+  position: relative;
+}
+
+.review-img {
+  position: absolute;
+  width: 300px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 1s ease;
+  border-radius: 14px;
+  box-shadow: 0 14px 35px rgba(0,0,0,0.25);
+}
+
+.review-img.active { opacity: 1; }
+
+.about-right { padding: 0 60px; }
+
+.about-text {
+  font-size: 1.05rem;
+  line-height: 1.9;
+  color: #333;
+}
+
+/* ===== CONTACT CTA ===== */
+.contact-now {
+  background: #000;
+  padding: 60px 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.contact-now h2,
+.contact-now p { color: #fff; }
+
+.contact-now a {
+  background: #fff;
+  color: #000;
+  padding: 14px 28px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* ===== SERVICES ===== */
+
+.services {
+  background: linear-gradient(180deg, #000, #7c3aed);
+  padding: 240px 0 160px;
+  color: #fff; /* This turns the main title and subtext white */
+}
+
+.services h2 {
+  text-align: center;
+  font-size: 2.4rem;
+}
+
+.services-subtext {
+  text-align: center;
+  font-size: 1.2rem;
+  font-style: italic;
+}
+
+.services-grid {
+  max-width: 1400px;
+  margin: 90px auto 0;
+  padding: 0 60px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 30px;
+}
+
+.service-box {
+  background: rgba(255,255,255,0.15);
+  border: 2px solid #000;
+  padding: 26px 20px;
+  height: 120px;
+  overflow: hidden;
+  transition: height 0.45s ease;
+}
+
+.service-box:hover { height: 360px; }
+
+.service-desc {
+  opacity: 0;
+  margin-top: 18px;
+  line-height: 1.6;
+}
+/* ===== ALERT BOX BASE STRUCTURE ===== */
+.alert-box {
+  position: fixed;
+  top: -100px; /* Hidden off-screen initially */
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 16px 32px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  font-weight: bold;
+  z-index: 9999;
+  transition: top 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Smooth slide down effect */
+}
+
+/* Active drop down state */
+.alert-box.active {
+  top: 30px; 
+}
+
+/* Loading Box Background Styling */
+.loading-box {
+  background: #1e1b4b; /* Deep premium midnight purple/blue background */
+  color: #fff;
+  border: 1px solid #7c3aed;
+}
+
+/* CSS Spinning Loader Ring */
+.spinner {
+  width: 22px;
+  height: 22px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #60a5fa; /* Blue accent matching your theme color */
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.service-box:hover .service-desc { opacity: 1; }
+
+/* ===== GALLERY ===== */
+.gallery {
+  background: linear-gradient(180deg, #7c3aed, #60a5fa);
+  padding: 160px 0;
+}
+
+.gallery h2,
+.gallery p { text-align: center; }
+
+.gallery-grid {
+  max-width: 1300px;
+  margin: 70px auto;
+  padding: 0 60px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.gallery-grid img {
+  width: 100%;
+  height: 390px;
+  object-fit: cover;
+  border-radius: 16px;
+  border: 3px solid #000;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+
+.gallery-grid img:hover { transform: scale(1.03); }
+
+/* ===== LIGHTBOX ===== */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+  z-index: 3000;
+}
+
+.lightbox.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.lightbox img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 16px;
+}
+
+/* ===== FINAL CONTACT ===== */
+.contact-final {
+  background: linear-gradient(180deg, #60a5fa, #000);
+  padding: 140px 80px;
+}
+
+.contact-grid {
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.contact-details { color: #fff; }
+/* Container holding both buttons on the right side */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Spaces out the Sign In and Book a Quote buttons */
+}
+
+/* Premium styled Sign In Button */
+.login-btn {
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  padding: 10px 20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 30px;
+  transition: all 0.3s ease;
+}
+
+.login-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #60a5fa; /* Glows blue on hover to match theme */
+  color: #60a5fa;
+}
+
+/* ===== COMPLETE MOBILE RESPONSIVE OPTIMIZATION ===== */
+@media (max-width: 768px) {
+  /* Mobile Header Adjustments */
+  .top-header {
+    padding: 0 12px !important;
+    justify-content: space-between !important;
+  }
+
+  .header-actions {
+    gap: 8px !important; /* Pulls the buttons closer together on small screens */
+  }
+
+  .login-btn {
+    font-size: 0.7rem !important;
+    padding: 6px 12px !important;
+  }
+
+  .quote-btn {
+    font-size: 0.7rem !important;
+    padding: 6px 12px !important;
+  }
+
+  /* Force everything to stay within the phone boundaries */
+  html, body {
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  /* 1. Scale down the Hero section elements */
+  .diamond-logo {
+    width: 70% !important;
+    max-width: 240px;
+    height: auto;
+  }
+  
+  .logo-text {
+    font-size: 1.6rem !important;
+  }
+
+  /* 2. Strip desktop nav bar links so header doesn't expand */
+  .nav {
+    display: none !important; 
+  }
+  
+  .top-header {
+    padding: 0 15px;
+    justify-content: space-between;
+  }
+
+  .quote-btn {
+    font-size: 0.75rem;
+    padding: 8px 14px;
+  }
+
+  /* 3. Drop About Section into a single vertical column */
+  .about-content {
+    grid-template-columns: 1fr !important; /* Stack vertically instead of side-by-side */
+    padding: 0 20px;
+    gap: 30px;
+  }
+  
+  .about-divider {
+    display: none; /* Hide the vertical separator line on mobile */
+  }
+
+  .about-right {
+    padding: 0 10px;
+  }
+
+  /* 4. Fix Services Grid (Stack them 1-by-1 instead of 5 columns wide) */
+  .services-grid {
+    grid-template-columns: 1fr !important;
+    padding: 0 20px;
+  }
+
+  .service-box {
+    height: auto; /* Allow text wrapping */
+    min-height: 100px;
+  }
+  
+  .service-box:hover {
+    height: auto;
+  }
+  
+  .service-desc {
+    opacity: 1; /* Keep text visible on touch devices where hover doesn't exist */
+    margin-top: 10px;
+  }
+
+  /* 5. Fix Gallery Grid (Stack images 1-by-1 or 2-by-2) */
+  .gallery-grid {
+    grid-template-columns: 1fr !important;
+    padding: 0 20px;
+  }
+  
+  .gallery-grid img {
+    height: 280px; /* Make them slightly shorter for phone scrolls */
+  }
+
+  /* 6. Fix Contact Grid footer alignment */
+  .contact-grid {
+    grid-template-columns: 1fr !important;
+    text-align: center;
+    gap: 40px;
+  }
+  
+  .contact-grid img {
+    margin: 0 auto;
+  }
+  
+  .contact-now {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+    padding: 40px 20px;
+  }
+}
+
+
+</style>
+</head>
+
+<body>
+
+<header class="top-header">
+  <div class="header-left">
+    <img src="images/elite-diamond.png" class="diamond-logo-mini" alt="Elite Detailz Logo">
+    <nav class="nav">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+  
+  <div class="header-actions">
+    <a href="Login.html" class="login-btn">Sign In</a>
+    <a href="quote.html" class="quote-btn">BOOK A QUOTE</a>
+  </div>
+</header>
+
+<!-- Please Wait / Loading Alert Box -->
+<div id="loading-alert" class="alert-box loading-box">
+  <div class="spinner"></div>
+  <span>Please wait, processing your request...</span>
+</div>
+
+<section class="hero" id="home">
+  <div class="logo-container">
+    <img src="images/elite-diamond.png" class="diamond-logo">
+    <div class="logo-text">ELITE DETAILZ</div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="about-title"><h2>About Us</h2></div>
+
+  <div class="about-content">
+    <div class="review-fade">
+      <img src="images/Google Review 1.png" class="review-img active">
+      <img src="images/Google Review 2.png" class="review-img">
+      <img src="images/Google Review 3.png" class="review-img">
+      <img src="images/Google Review 4.png" class="review-img">
+    </div>
+
+    <div class="about-divider"></div>
+
+    <div class="about-right">
+      <div class="about-text">
+        At Elite Detailz, we don’t just clean cars — we restore, protect, and enhance them.
+        Based in North East London (Loughton) / West Essex, we serve Chigwell, Epping,
+        Buckhurst Hill, providing high-quality vehicle valeting and detailing services
+        tailored to each customer’s needs.
+        <br><br>
+        With extensive experience across modern and classic vehicles, our work goes far
+        beyond a standard wash.
+        <br><br>
+        Our reputation is built on attention to
+        <strong>Detail</strong>,
+        <strong>Reliability</strong>, and
+        <strong>Pride</strong> in our workmanship.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact-now">
+  <div>
+    <h2>Contact Us Now</h2>
+    <p>Book a professional detailing service today</p>
+  </div>
+  <a href="#contact">Contact Us Now</a>
+</section>
+
+<section class="services" id="services">
+  <h2>Services</h2>
+  <p class="services-subtext">These are the services that we offer to our customers!</p>
+
+  <div class="services-grid">
+    <div class="service-box"><h3>Exterior & Interior</h3><div class="service-desc">Our interior deep cleaning refreshes and sanitises your cabin, while exterior detailing safely removes dirt and grime, restoring gloss, protection, and a near-new finish overall.</div></div>
+    <div class="service-box"><h3>Ceramic Coating</h3><div class="service-desc">Elevate your car's protection and gloss with our ceramic coating application, creating a hydrophobic and durable barrier.</div></div>
+    <div class="service-box"><h3>Paint Correction</h3><div class="service-desc">Our expert service eliminates swirls, scratches, and oxidation while restoring gloss and clarity. Using precision techniques and premium service , we tailor the process to your paint's condition giving your car a showroom  finish.</div></div>
+    <div class="service-box"><h3>Scratch Repair</h3><div class="service-desc">Our scratch repair service minimises light to moderate scratches and paint defects, restoring a smooth, uniform finish.</div></div>
+    <div class="service-box"><h3>Headlight Restoration</h3><div class="service-desc">Our headlight restoration service removes oxidation and yellowing, restoring clarity and brightness through precision sanding and polishing, improving visibility, safety, appearance, and delivering a durable like-new finish.</div></div>
+  </div>
+</section>
+
+<section class="gallery" id="gallery">
+  <h2>Gallery</h2>
+  <p>Here is some of our work</p>
+  <div class="gallery-grid">
+    <img src="images/Gallery 1.png">
+    <img src="images/Gallery 2.png">
+    <img src="images/Gallery 3.png">
+    <img src="images/Gallery 4.png">
+    <img src="images/Gallery 5.png">
+    <img src="images/Gallery 6.png">
+  </div>
+</section>
+
+<section class="contact-final" id="contact">
+  <div class="contact-grid">
+    <!-- LEFT: LOGO -->
+    <img src="images/elite-diamond.png" width="180">
+
+    <!-- RIGHT: DETAILS -->
+    <div class="contact-details">
+      <h2 style="color:#fff;">Contact Us</h2>
+      <p>Email: detailzz.elite@gmail.com</p>
+      <p>Phone: 07516 087901</p>
+      <p>© 2026 Elite Detailz. All rights reserved.</p>
+      <p>Terms and Conditions -</p>
+      <p>Privacy Policy Secure</p>
+
+
+      <a href="https://www.instagram.com/elite_.detailz/" 
+         target="_blank" 
+         style="display:flex; align-items:center; gap:12px; margin-top:20px; text-decoration:none; color:#fff;">
+        <img src="images/instagram.png" width="28">
+        <span>@elite_.detailz</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<div class="lightbox" id="lightbox">
+  <img id="lightbox-img">
+</div>
+
+<script>
+function createRain() {
+  const img = document.createElement("img");
+  img.src = "images/elite-diamond.png";
+  img.className = "rain";
+  img.style.left = Math.random() * window.innerWidth + "px";
+  document.querySelector(".hero").appendChild(img);
+  setTimeout(() => img.remove(), 7000);
+}
+setInterval(createRain, 600);
+
+/* Google Reviews Fade */
+const reviews = document.querySelectorAll(".review-img");
+let index = 0;
+setInterval(() => {
+  reviews[index].classList.remove("active");
+  index = (index + 1) % reviews.length;
+  reviews[index].classList.add("active");
+}, 5000);
+
+/* Gallery Lightbox */
+const galleryImages = document.querySelectorAll(".gallery-grid img");
+const lightbox = document.getElementById("lightbox");
+const lightboxImg = document.getElementById("lightbox-img");
+
+galleryImages.forEach(img => {
+  img.addEventListener("click", () => {
+    lightboxImg.src = img.src;
+    lightbox.classList.add("active");
+  });
+});
+
+lightbox.addEventListener("click", () => {
+  lightbox.classList.remove("active");
+});
+</script>
+
+</body>
+</html>
